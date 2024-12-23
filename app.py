@@ -18,7 +18,7 @@ args = parser.parse_args()
 
 # Check if GPU is available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-refacer = Refacer(force_cpu=args.force_cpu, colab_performance=args.colab_performance, device=device)
+refacer = Refacer(force_cpu=args.force_cpu, colab_performance=args.colab_performance)
 
 num_faces = args.max_num_faces
 
