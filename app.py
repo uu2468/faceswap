@@ -3,6 +3,7 @@ from refacer import Refacer
 import argparse
 import ngrok
 import torch
+import concurrent.futures
 
 parser = argparse.ArgumentParser(description='Refacer')
 parser.add_argument("--max_num_faces", type=int, help="Max number of faces on UI", default=5)
@@ -59,8 +60,13 @@ def run(*vars):
                 'destination': destinations[k],
                 'threshold': thresholds[k]
             })
-
-    return refacer.reface(video_path, faces)
+    
+    # Use concurrent futures for parallel processing
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future = executor.submit(refacer.reface, video_path, faces)
+        result = future.result()
+    
+    return result
 
 origin = []
 destination = []
