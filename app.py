@@ -35,7 +35,6 @@ def connect(token, port, options):
     if account:
         options['basic_auth'] = account
 
-
     try:
         public_url = ngrok.connect(f"127.0.0.1:{port}", **options).url()
     except Exception as e:
@@ -44,7 +43,6 @@ def connect(token, port, options):
     else:
         print(f'ngrok connected to localhost:{port}! URL: {public_url}\n'
                'You can use this link after the launch is complete.')
-
 
 def run(*vars):
     video_path=vars[0]
